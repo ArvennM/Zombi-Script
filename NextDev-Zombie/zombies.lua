@@ -39,8 +39,8 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
 
         -- Peds
-        SetPedDensityMultiplierThisFrame(9.0)  -- Zombi yoğunluğunu daha da artırdık
-        SetScenarioPedDensityMultiplierThisFrame(9.0, 9.0)  -- Zombi yoğunluğunu daha da artırdık
+        SetPedDensityMultiplierThisFrame(9.0) 
+        SetScenarioPedDensityMultiplierThisFrame(9.0, 9.0) 
 
         -- Vehicles
         SetRandomVehicleDensityMultiplierThisFrame(0.0)
@@ -209,7 +209,7 @@ Citizen.CreateThread(function()
                     end
                 end
                 
-                -- Zombilerin araçların camlarını kırması
+              
                 local nearbyVehicle = GetClosestVehicle(PedCoords.x, PedCoords.y, PedCoords.z, 3.0, 0, 70)
                 if DoesEntityExist(nearbyVehicle) then
                     SmashVehicleWindow(nearbyVehicle, 0)
@@ -230,22 +230,22 @@ Citizen.CreateThread(function()
     end
 end)
 
--- Zombilerin oyuncudan uzakta spawn olması için 
+
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(2000) -- 2  saniyede bir kontrol et
+        Citizen.Wait(2000) -- 
         local playerPed = PlayerPedId()
         local playerCoords = GetEntityCoords(playerPed)
         
-        -- Oyuncunun önünde 5-6 araba ilerisinde bir nokta belirle
-        local spawnDistance = math.random(130, 150) --  araba mesafesi yaklaşık 100-150 birim
+      
+        local spawnDistance = math.random(130, 150) 
         local playerHeading = GetEntityHeading(playerPed)
         local spawnX = playerCoords.x + spawnDistance * math.sin(math.rad(-playerHeading))
         local spawnY = playerCoords.y + spawnDistance * math.cos(math.rad(-playerHeading))
         local _, spawnZ = GetGroundZFor_3dCoord(spawnX, spawnY, playerCoords.z + 100.0, 0)
         
-        -- Zombi oluştur
-        local zombieHash = GetHashKey("a_m_m_beach_01") -- Örnek bir ped modeli
+       
+        local zombieHash = GetHashKey("a_m_m_beach_01") 
         RequestModel(zombieHash)
         while not HasModelLoaded(zombieHash) do
             Citizen.Wait(1)
